@@ -3,151 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Arca — Jornada de Noé</title>
+<title>A Arca — Mesa do Professor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Oswald:wght@400;500;600;700&family=Spectral:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Oswald:wght@400;500;600;700&family=Spectral:ital@0;1&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--teal:#27C49A;--teal-l:#49D6B0;--teal-d:#1C9D7B;--teal-dd:#0f6048;--frame:#202523;--paper:#ECE7D4;--ink:#1d241f;--label:#E8902A;--star:#F2B23C;--gold:#E8B84B;--red:#CF3A2C;--red-d:#9E2A20;--lcd:#86CF8C;--lcd-grid:#7cc685;--lcd-ink:#14391d}
+  :root{--red:#CF3A2C;--red-d:#9E2A20;--lcd:#86CF8C;--lcd-grid:#7cc685;--lcd-ink:#14391d;--frame:#202523;--paper:#ECE7D4;--ink:#1d241f;--gold:#E8B84B;--steel:#9aa0a8;--steel-d:#5b616a;--navy:#1c2740;--navy-d:#121a2e}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Oswald',sans-serif;color:var(--ink);min-height:100vh;padding:28px 14px 70px;background:#0c1411;background-image:radial-gradient(circle at 50% -5%,#16302a,#0b1310 60%)}
+  body{font-family:'Oswald',sans-serif;color:var(--ink);min-height:100vh;padding:26px 14px 70px;
+    background:
+      radial-gradient(ellipse at 50% 0,rgba(255,235,200,.12),transparent 60%),
+      linear-gradient(rgba(40,22,10,.18),rgba(18,9,3,.5)),
+      repeating-linear-gradient(91deg,#79502e 0 2px,#714a29 2px 5px,#7b522f 5px 8px),
+      linear-gradient(125deg,#8a5a32,#5f3d20 55%,#4a2f18)}
   .head{text-align:center;margin-bottom:18px}
-  .head .t{font-family:'Press Start 2P',monospace;font-size:.86rem;color:var(--teal-l);letter-spacing:1px}
-  .head .s{font-family:'Press Start 2P',monospace;font-size:.5rem;color:#6f9486;margin-top:8px;letter-spacing:1px}
-  .layout{display:flex;flex-wrap:wrap;gap:26px;justify-content:center;align-items:flex-start;max-width:940px;margin:0 auto}
-  .obj{flex:1 1 380px;max-width:440px}
-  .objlabel{font-family:'Press Start 2P',monospace;font-size:.5rem;color:#8fc7b6;text-align:center;margin-bottom:10px;letter-spacing:1px}
+  .head .t{font-family:'Press Start 2P',monospace;font-size:.86rem;color:#fbe9c8;letter-spacing:1px;text-shadow:0 2px 3px rgba(0,0,0,.55)}
+  .head .s{font-family:'Caveat',cursive;font-size:1.25rem;color:#e9d3a8;margin-top:6px}
+  .deskLabel{font-family:'Caveat',cursive;font-size:1.7rem;font-weight:700;color:#fff3dc;text-shadow:0 2px 3px rgba(0,0,0,.6);margin-bottom:6px;padding-left:4px}
+  .deskLabel small{display:block;font-size:.95rem;color:#e6cfa4;font-weight:500;line-height:1.15;margin-top:-2px}
 
-  /* POKÉTIMER */
-  .ptimer{max-width:940px;margin:0 auto 14px}
-  .pt-device{border:6px solid #14223a;border-radius:18px;padding:14px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 6px),linear-gradient(160deg,#2f63ab,#1c4480 50%,#132f54);box-shadow:0 16px 40px rgba(0,0,0,.5),inset 0 2px 0 rgba(255,255,255,.18)}
-  .pt-screen{background:var(--lcd);border:3px solid #0e3a1e;border-radius:8px;padding:10px 18px;text-align:center;background-image:linear-gradient(var(--lcd-grid) 1px,transparent 1px),linear-gradient(90deg,var(--lcd-grid) 1px,transparent 1px);background-size:14px 14px}
-  .pt-clock{font-family:'Press Start 2P',monospace;font-size:1.3rem;color:#14391d;letter-spacing:1px}
-  .pt-label{font-family:'Press Start 2P',monospace;font-size:.4rem;color:#2f7a45;margin-top:7px;letter-spacing:1px}
-  .pt-controls{display:flex;gap:8px}
-  .pt-controls button{font-family:'Press Start 2P',monospace;font-size:.5rem;padding:10px 12px;border-radius:8px;cursor:pointer;border:2px solid #14223a;background:#bff7cf;color:#0e3a1e;letter-spacing:.5px}
-  .pt-controls button:hover{background:#d8ffe2}
-  .pt-mark{display:flex;gap:8px;flex:1;min-width:230px}
-  .pt-mark input{flex:1;border:2px solid #14223a;border-radius:8px;padding:9px 11px;font-family:'Oswald',sans-serif;font-size:.95rem;color:#13243a;background:#eaf2ff}
-  .pt-mark input:focus{outline:none;background:#fff}
-  .pt-mark button{font-family:'Press Start 2P',monospace;font-size:.5rem;padding:10px 13px;border-radius:8px;cursor:pointer;border:2px solid #14223a;background:#f2c14e;color:#3a2a06;letter-spacing:.5px;white-space:nowrap}
-  .pt-mark button:hover{background:#ffd266}
-  .pt-timeline{margin-top:14px;border:5px solid #14223a;border-radius:14px;overflow:hidden;background:#15202f}
-  .ptl-title{background:linear-gradient(#1c4480,#132f54);color:#cfe0f5;font-family:'Press Start 2P',monospace;font-size:.56rem;padding:12px 16px;letter-spacing:1px}
-  .ptl-list{padding:18px 18px 8px;max-height:300px;overflow:auto}
-  .ptl-empty{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#5f7596;text-align:center;padding:18px;line-height:1.9}
-  .ptl-item{position:relative;padding:0 0 16px 26px}
-  .ptl-item::before{content:"";position:absolute;left:5px;top:5px;bottom:-1px;width:2px;background:#2c3e57}
-  .ptl-item:last-child::before{display:none}
-  .ptl-item .node{position:absolute;left:0;top:3px;width:12px;height:12px;border-radius:50%;border:2px solid #15202f}
-  .ptl-item .stamp{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#7fb3ff;letter-spacing:.5px}
-  .ptl-item .txt{font-family:'Oswald',sans-serif;font-size:.96rem;color:#dfe8f5;margin-top:4px}
-
-  /* TOOLBAR export/import */
-  .toolbar{max-width:940px;margin:0 auto 22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-  .toolbar button,.toolbar label{font-family:'Press Start 2P',monospace;font-size:.5rem;padding:11px 16px;border-radius:9px;cursor:pointer;border:2px solid #14150f;letter-spacing:.5px;display:inline-flex;align-items:center;gap:7px}
+  /* TOOLBAR */
+  .toolbar{max-width:1000px;margin:0 auto 22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .toolbar button,.toolbar label{font-family:'Press Start 2P',monospace;font-size:.5rem;padding:11px 16px;border-radius:9px;cursor:pointer;border:2px solid #14150f;letter-spacing:.5px;display:inline-flex;align-items:center;gap:7px;box-shadow:0 4px 10px rgba(0,0,0,.35)}
   .toolbar .exp{background:#2f9e7e;color:#06241b}.toolbar .exp:hover{background:#3bb993}
   .toolbar .imp{background:#3a4150;color:#dfe8f5}.toolbar .imp:hover{background:#4a5263}
 
-  /* 3D REGISTER POKEBALL */
-  .regwrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin:6px 0 30px}
-  .regball{width:132px;height:132px;border-radius:50%;position:relative;cursor:pointer;border:4px solid #0f1014;
-    background:radial-gradient(circle at 33% 23%,rgba(255,255,255,.98),rgba(255,255,255,.25) 12%,rgba(255,255,255,0) 32%),linear-gradient(180deg,#ff6353 0 45%,#e23a29 45% 46.5%,#0f1014 46.5% 53.5%,#eaeaea 53.5% 55%,#ffffff 55% 100%);
-    box-shadow:inset -15px -17px 32px rgba(0,0,0,.45),inset 13px 11px 24px rgba(255,255,255,.32),0 20px 32px rgba(0,0,0,.6),0 2px 0 rgba(255,255,255,.15);
-    animation:floaty 3.4s ease-in-out infinite;transition:transform .18s}
-  .regball:hover{transform:scale(1.06)}
-  .regball:active{transform:scale(.97)}
-  .regball::before{content:"";position:absolute;top:14px;left:24px;width:42px;height:22px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.85),rgba(255,255,255,0) 70%);transform:rotate(-25deg);filter:blur(1px)}
-  .regball::after{content:"";position:absolute;left:50%;top:50%;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#fff 0 38%,#ececec 62%,#c9c9c9);border:4px solid #0f1014;transform:translate(-50%,-50%);box-shadow:0 0 0 4px #fff,0 0 0 7px #0f1014,0 0 18px rgba(255,255,255,.6),inset 0 -3px 5px rgba(0,0,0,.25)}
-  .regshadow{width:100px;height:17px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.55),transparent 70%);margin-top:-2px;animation:shrink 3.4s ease-in-out infinite;filter:blur(1px)}
-  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-  @keyframes shrink{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(.82);opacity:.35}}
-  .reglabel{font-family:'Press Start 2P',monospace;font-size:.56rem;color:#bdebda;letter-spacing:1px;text-align:center}
-  .reglabel small{display:block;color:#6f9486;font-size:.42rem;margin-top:6px}
+  /* DESK LAYOUT */
+  .desk{display:grid;grid-template-columns:1fr 1fr;gap:30px;max-width:1000px;margin:0 auto;align-items:start}
+  .pokedex-wrap{grid-column:1}.case-wrap{grid-column:2}
+  .ball-wrap{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;margin-top:10px}
+  @media(max-width:780px){.desk{grid-template-columns:1fr}.pokedex-wrap,.case-wrap{grid-column:1}}
 
-  /* CASE */
-  .case{perspective:1600px;position:relative}
-  .case-stack{position:relative;border:7px solid var(--frame);border-radius:20px;padding:16px;background:repeating-linear-gradient(135deg,rgba(255,255,255,.045) 0 2px,transparent 2px 6px),linear-gradient(158deg,var(--teal-l),var(--teal) 50%,var(--teal-d));box-shadow:0 18px 44px rgba(0,0,0,.55),inset 0 2px 0 rgba(255,255,255,.22),inset 0 -3px 8px rgba(0,0,0,.25)}
-  .screw{position:absolute;width:13px;height:13px;border-radius:50%;z-index:6;background:radial-gradient(circle at 38% 32%,#46524d,#0e1714);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 1px 1px rgba(0,0,0,.4)}
-  .screw::after{content:"";position:absolute;left:2px;right:2px;top:50%;height:2px;background:rgba(0,0,0,.55);transform:translateY(-50%) rotate(40deg)}
-  .screw.tl{top:7px;left:7px}.screw.tr{top:7px;right:7px}.screw.bl{bottom:7px;left:7px}.screw.br{bottom:7px;right:7px}
-  .tray{border-radius:14px;padding:13px;background:linear-gradient(#0c5240,#0a4636);box-shadow:inset 0 5px 16px rgba(0,0,0,.5),inset 0 -2px 5px rgba(255,255,255,.05)}
-  .idcard{background:repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 2px,transparent 2px 7px),linear-gradient(135deg,#2ad0a4,#159a78 72%);border:2px solid var(--frame);border-radius:11px;padding:12px;position:relative;overflow:hidden;box-shadow:0 3px 8px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.3)}
-  .idcard::after{content:"";position:absolute;right:-34px;top:-34px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.2),transparent 70%)}
-  .id-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-  .id-top .tt{font-family:'Press Start 2P',monospace;font-size:.56rem;color:#fff;letter-spacing:1px;text-shadow:1px 1px 0 #0b5}
-  .id-top .no{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#eafff7}
-  .id-body{display:grid;grid-template-columns:84px 1fr;gap:12px}
-  .id-photo{height:106px;background:#d7efe6;border:2px solid var(--frame);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;box-shadow:inset 0 2px 6px rgba(0,0,0,.3)}
-  .id-photo img{width:100%;height:100%;object-fit:cover}
-  .id-photo .pp{font-family:'Press Start 2P',monospace;font-size:.42rem;color:#5d8a78;text-align:center;line-height:1.8}
-  .id-fields{display:flex;flex-direction:column;gap:6px;justify-content:center}
-  .idf{display:flex;align-items:center;gap:8px}
-  .idf .l{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#064;min-width:62px}
-  .idf input{flex:1;background:rgba(255,255,255,.6);border:1px solid #0a6f57;border-radius:4px;padding:4px 6px;font-family:'Oswald',sans-serif;font-weight:600;font-size:.9rem;color:#0a3326}
-  .idf input:focus{outline:none;background:#fff}.idf input[readonly]{background:rgba(255,255,255,.32)}
-  .trurl{margin-top:8px;display:flex;gap:6px}
-  .trurl input{flex:1;background:rgba(255,255,255,.55);border:1px solid #0a6f57;border-radius:4px;padding:5px 7px;font-family:'Oswald',sans-serif;font-size:.78rem;color:#0a3326}
-  .trurl input:focus{outline:none;background:#fff}
-  .trurl button{font-family:'Press Start 2P',monospace;font-size:.4rem;border:1px solid var(--frame);background:#0e5340;color:#cfe;border-radius:4px;padding:0 8px;cursor:pointer}
-  .id-foot{margin-top:8px;background:var(--frame);color:#9fe9d3;font-family:'Press Start 2P',monospace;font-size:.46rem;border-radius:5px;padding:7px 10px;display:flex;justify-content:space-between;align-items:center;box-shadow:inset 0 1px 3px rgba(0,0,0,.5)}
-  .id-foot input{background:transparent;border:none;color:#fff;font-family:'Press Start 2P',monospace;font-size:.46rem;text-align:right;width:90px}.id-foot input:focus{outline:none}
-  .hingebar{height:18px;margin:13px 4px;border-radius:9px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:linear-gradient(#073c2e,#0c5240);box-shadow:inset 0 2px 5px rgba(0,0,0,.6),inset 0 -1px 0 rgba(255,255,255,.06)}
-  .hingebar i{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#2f9e7e,#063a2c);box-shadow:0 1px 1px rgba(0,0,0,.5)}
-  .hingebar .bar{flex:1;height:4px;margin:0 8px;border-radius:3px;background:repeating-linear-gradient(90deg,#0a4a39 0 6px,#0e5d47 6px 12px)}
-  .badges-h{font-family:'Press Start 2P',monospace;font-size:.5rem;color:#d6fff0;letter-spacing:1px;margin-bottom:10px;text-align:center}
-  .badges{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-  .badge{text-align:center;cursor:pointer;padding:6px 2px;border-radius:10px;transition:background .2s}
-  .badge:hover{background:rgba(255,255,255,.07)}.badge.sel{outline:2px solid var(--gold);outline-offset:-1px}
-  .badge .holder{width:50px;height:50px;margin:0 auto 5px;display:flex;align-items:center;justify-content:center;position:relative;filter:grayscale(1) brightness(.65) opacity(.5);transition:filter .35s,transform .2s}
-  .badge.done .holder{filter:none;transform:scale(1.06)}
-  .badge.done .holder::after{content:"";position:absolute;inset:-7px;border-radius:50%;box-shadow:0 0 15px var(--bc);z-index:-1}
-  .badge .bn{font-family:'Press Start 2P',monospace;font-size:.4rem;color:#cdeee3;line-height:1.4}
-  .badge img.bimg{width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4))}
-  .bdg{width:40px;height:40px;position:relative;filter:drop-shadow(0 2px 2px rgba(0,0,0,.45))}
-  .bdg.boulder{clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%);background:linear-gradient(135deg,#e2e2e6,#9a9aa0);box-shadow:inset 0 0 0 4px rgba(255,255,255,.18)}
-  .bdg.cascade{width:34px;height:34px;border-radius:6px 50% 50% 50%;transform:rotate(45deg);background:radial-gradient(circle at 60% 35%,#bfe9ff,#2a93e0)}
-  .bdg.thunder{clip-path:polygon(50% 0,60% 18%,82% 12%,76% 33%,98% 40%,80% 50%,98% 60%,76% 67%,82% 88%,60% 82%,50% 100%,40% 82%,18% 88%,24% 67%,2% 60%,20% 50%,2% 40%,24% 33%,18% 12%,40% 18%);background:radial-gradient(circle,#ffd84a,#f08a1d)}
-  .bdg.rainbow{border-radius:50%;background:conic-gradient(#e74c3c 0 45deg,#e67e22 45deg 90deg,#f1c40f 90deg 135deg,#2ecc71 135deg 180deg,#1abc9c 180deg 225deg,#3498db 225deg 270deg,#9b59b6 270deg 315deg,#e84393 315deg 360deg)}
-  .bdg.rainbow::after{content:"";position:absolute;left:50%;top:50%;width:13px;height:13px;border-radius:50%;background:#5a5f5d;border:2px solid #2c2f2e;transform:translate(-50%,-50%)}
-  .bdg.soul{clip-path:polygon(50% 100%,8% 48%,0 28%,12% 8%,32% 8%,50% 26%,68% 8%,88% 8%,100% 28%,92% 48%);background:linear-gradient(135deg,#ffb3d1,#f06aa0)}
-  .bdg.marsh{border-radius:50%;background:radial-gradient(circle at 40% 35%,#ffe06b,#dca22a);box-shadow:inset 0 0 0 3px rgba(255,255,255,.25)}
-  .bdg.volcano{clip-path:polygon(50% 0,62% 26%,80% 16%,72% 42%,94% 46%,72% 62%,88% 100%,50% 80%,12% 100%,28% 62%,6% 46%,28% 42%,20% 16%,38% 26%);background:linear-gradient(#ff6a44,#c0231a)}
-  .bdg.earth{width:30px;height:38px;border-radius:0 100% 0 100%;background:linear-gradient(135deg,#8fe07a,#2f9e3f);box-shadow:inset 0 0 0 3px rgba(255,255,255,.18)}
-  .pocket{margin-top:16px;position:relative;height:36px}
-  .pocket .lip{position:absolute;inset:0;border:2px solid var(--frame);border-radius:9px;z-index:3;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(#0e5340,#073c2e);box-shadow:inset 0 -2px 5px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
-  .pocket .lip span{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#bff;letter-spacing:1px}
-  .leadercard{position:absolute;left:8px;right:8px;bottom:10px;background:var(--paper);border:3px solid var(--frame);border-radius:9px;padding:12px 14px;z-index:2;transform:translateY(0) scale(.96);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.5,1.6,.4,1),opacity .35s;transform-origin:bottom center;box-shadow:0 8px 20px rgba(0,0,0,.45)}
-  .leadercard.show{transform:translateY(-32px) scale(1);opacity:1;pointer-events:auto;z-index:5}
-  .leadercard .lh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-  .leadercard .lh .gl{font-family:'Press Start 2P',monospace;font-size:.48rem;color:var(--teal-dd);letter-spacing:1px}
-  .leadercard .lh .x{cursor:pointer;font-family:'Press Start 2P',monospace;font-size:.5rem;color:#b33}
-  .leadercard .name{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.4rem;color:var(--ink);line-height:1}
-  .leadercard .meta{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#555;line-height:2;margin-top:6px}
-  .leadercard .meta b{color:var(--label)}
-  .leadercard .lburl{display:flex;gap:5px;margin-top:8px}
-  .leadercard .lburl input{flex:1;border:1px solid #b9b4a0;border-radius:4px;padding:4px 6px;font-family:'Oswald',sans-serif;font-size:.74rem}
-  .leadercard .lburl input:focus{outline:none;border-color:var(--teal-d)}
-  .leadercard .lburl button{font-family:'Press Start 2P',monospace;font-size:.4rem;border:1px solid var(--frame);background:var(--teal-d);color:#fff;border-radius:4px;padding:0 7px;cursor:pointer}
-  .leadercard .badgeico{position:absolute;top:10px;right:14px;width:44px;height:44px;border:2px dashed var(--teal-d);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;background:rgba(255,255,255,.4)}
-  .leadercard .badgeico .imptip{position:absolute;bottom:-1px;left:0;right:0;font-family:'Press Start 2P',monospace;font-size:.3rem;color:#0a6f57;background:rgba(255,255,255,.7);padding:1px}
-  .leadercard .badgeico img{width:100%;height:100%;object-fit:contain}
-  .lid{position:absolute;inset:0;transform-origin:top center;transition:transform 1s cubic-bezier(.6,.15,.25,1);border:7px solid var(--frame);border-radius:20px;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;backface-visibility:hidden;background:repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 2px,transparent 2px 6px),linear-gradient(150deg,var(--teal-l),var(--teal) 52%,var(--teal-d));box-shadow:0 16px 40px rgba(0,0,0,.5),inset 0 3px 0 rgba(255,255,255,.25),inset 0 -22px 36px rgba(0,0,0,.18)}
-  .lid::before{content:"";position:absolute;inset:14px;border:2px solid rgba(0,0,0,.16);border-radius:13px}
-  .lid .latch{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:64px;height:14px;border-radius:0 0 8px 8px;background:linear-gradient(#0c5240,#073c2e);border:2px solid var(--frame);border-top:none}
-  .case.open .lid{transform:rotateX(-172deg);pointer-events:none;box-shadow:none}
-  .lid .pin{width:108px;height:108px;opacity:.9;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}.lid .pin svg{width:100%;height:100%}
-  .lid .open-cta{font-family:'Press Start 2P',monospace;font-size:.5rem;color:#063a2c;margin-top:18px;letter-spacing:1px;background:rgba(255,255,255,.4);padding:8px 14px;border-radius:6px;border:2px solid var(--frame)}
-  .closehint{text-align:center;font-family:'Press Start 2P',monospace;font-size:.42rem;color:#cdeee3;margin-top:10px;cursor:pointer;opacity:.85}
-
-  /* POKEDEX */
-  .pokedex{border:6px solid #1c1e1d;border-radius:20px;padding:14px;background:repeating-linear-gradient(135deg,rgba(0,0,0,.05) 0 2px,transparent 2px 6px),linear-gradient(160deg,#e0473a,var(--red) 45%,var(--red-d));box-shadow:0 16px 40px rgba(0,0,0,.55),inset 0 2px 0 rgba(255,255,255,.2)}
+  /* ===== POKÉDEX (TEAM) ===== */
+  .pokedex{border:6px solid #1c1e1d;border-radius:20px;padding:14px;background:repeating-linear-gradient(135deg,rgba(0,0,0,.05) 0 2px,transparent 2px 6px),linear-gradient(160deg,#e0473a,var(--red) 45%,var(--red-d));box-shadow:0 18px 42px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.2)}
   .pdx-bezel{background:#2a2d2c;border-radius:12px;padding:10px;border:2px solid #14150f;box-shadow:inset 0 2px 6px rgba(0,0,0,.6)}
   .pdx-screen{background:var(--lcd);border:3px solid #0e3a1e;border-radius:7px;overflow:hidden;position:relative;background-image:linear-gradient(var(--lcd-grid) 1px,transparent 1px),linear-gradient(90deg,var(--lcd-grid) 1px,transparent 1px);background-size:16px 16px}
   .pdx-lights{position:absolute;top:9px;left:12px;display:flex;gap:7px;z-index:2}
   .pdx-lights i{width:13px;height:13px;border-radius:50%;display:block;border:2px solid #1d1f1e}
   .pdx-top{background:linear-gradient(#1f6b3a,#0e4022);padding:7px 10px 7px 44px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #0e3a1e}
-  .pdx-top .pt{font-family:'Press Start 2P',monospace;font-size:.54rem;color:#bff7cf;letter-spacing:.5px}
+  .pdx-top .pt{font-family:'Press Start 2P',monospace;font-size:.54rem;color:#bff7cf}
   .pdx-top .pc{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#eaffef}
   .pdx-sub{display:flex;justify-content:space-between;padding:5px 10px;font-family:'Press Start 2P',monospace;font-size:.44rem;color:var(--lcd-ink);border-bottom:1px dashed #4f9b5e}
   .pdx-list{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:8px}
@@ -161,10 +55,11 @@
   .ename::placeholder{font-family:'Press Start 2P',monospace;font-size:.44rem;color:#6aa877}
   .espec{font-family:'Oswald',sans-serif;font-size:.72rem;color:#3a7a4f;min-height:1em;font-style:italic}
   .pdx-bar{display:flex;align-items:center;gap:10px;padding:8px 10px;background:linear-gradient(#0e4022,#1f6b3a);border-top:2px solid #0e3a1e}
-  .cross-btn{font-family:'Press Start 2P',monospace;font-size:.56rem;color:#ffd4e4;background:#37202e;border:2px solid #0e3a1e;border-radius:8px;padding:9px 14px;cursor:pointer;letter-spacing:.5px;display:flex;align-items:center;gap:7px}
-  .cross-btn:hover{background:#502a3f}
-  .cross-btn .cr{font-size:.8rem;color:#fff}
-  .pdx-bar .info{margin-left:auto;font-family:'Press Start 2P',monospace;font-size:.5rem;color:#0e3a1e;background:#eaffef;border:2px solid #0e3a1e;border-radius:6px;padding:8px 11px;cursor:pointer}
+  .cross-btn{font-family:'Press Start 2P',monospace;font-size:.56rem;color:#ffd4e4;background:#37202e;border:2px solid #0e3a1e;border-radius:8px;padding:9px 12px;cursor:pointer;display:flex;align-items:center;gap:6px}
+  .cross-btn:hover{background:#502a3f}.cross-btn .cr{font-size:.8rem;color:#fff}
+  .f-btn{font-family:'Press Start 2P',monospace;font-size:.6rem;color:#dfe8f5;background:#2e2336;border:2px solid #0e3a1e;border-radius:8px;padding:9px 12px;cursor:pointer;letter-spacing:1px}
+  .f-btn:hover{background:#4a3a5a}
+  .pdx-bar .info{margin-left:auto;font-family:'Press Start 2P',monospace;font-size:.5rem;color:#0e3a1e;background:#eaffef;border:2px solid #0e3a1e;border-radius:6px;padding:8px 10px;cursor:pointer}
   .pdx-info{position:absolute;inset:0;background:rgba(8,40,22,.97);color:#dff7e6;padding:14px;overflow:auto;transform:translateY(101%);transition:transform .4s ease;z-index:8}
   .pdx-info.open{transform:translateY(0)}
   .pdx-info h4{font-family:'Press Start 2P',monospace;font-size:.56rem;color:#bff7cf;margin-bottom:12px;display:flex;justify-content:space-between}
@@ -175,31 +70,141 @@
   .pic .fr{padding-left:15px;margin-bottom:5px}
   .pic .fr .fn{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:.8rem;color:#9fe9b3}
   .pic .fr p{font-family:'Spectral',serif;font-size:.82rem;color:#cfead6;margin:1px 0}
-  .pic .fr .cd{font-size:.78rem;color:#a9d6b5}.pic .fr .cd b{color:var(--star)}
-  .pdx-ball{margin-top:12px;height:110px;border:4px solid #1c1e1d;border-radius:0 0 14px 14px;position:relative;background:radial-gradient(circle at 50% 44%,#fff 12%,#e6e6e6 13%,var(--red) 14%)}
+  .pic .fr .cd{font-size:.78rem;color:#a9d6b5}.pic .fr .cd b{color:var(--gold)}
+  .pdx-ball{margin-top:12px;height:80px;border:4px solid #1c1e1d;border-radius:0 0 14px 14px;position:relative;background:radial-gradient(circle at 50% 40%,#fff 12%,#e6e6e6 13%,var(--red) 14%)}
   .pdx-ball::before{content:"";position:absolute;left:0;right:0;top:50%;height:6px;background:#1c1e1d;transform:translateY(-50%)}
-  .pdx-ball .btn{position:absolute;left:50%;top:50%;width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#cfcfcf);border:5px solid #1c1e1d;transform:translate(-50%,-50%)}
+  .pdx-ball .btn{position:absolute;left:50%;top:50%;width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#cfcfcf);border:5px solid #1c1e1d;transform:translate(-50%,-50%)}
 
-  /* MODALS */
+  /* ===== BADGE CASE (horizontal, dobra ao abrir) ===== */
+  .bcase{position:relative;max-width:430px;margin:0 auto;height:160px;overflow:hidden;border:6px solid var(--steel);border-radius:13px;background:var(--navy-d);transition:height .62s cubic-bezier(.5,.1,.2,1);box-shadow:0 18px 40px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.28),inset 0 -3px 9px rgba(0,0,0,.45);perspective:1300px}
+  .bcase.open{height:314px}
+  .bc-hinge{position:absolute;left:14px;right:14px;top:150px;height:8px;z-index:6;background:repeating-linear-gradient(90deg,#cfd3d8 0 7px,#7d828a 7px 14px);border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.5);opacity:0;transition:opacity .3s .25s}
+  .bcase.open .bc-hinge{opacity:1}
+  .bc-lid,.bc-base{height:150px;padding:13px}
+  .bc-lid{background:radial-gradient(circle at 50% 120%,#26314e,var(--navy) 55%,var(--navy-d));display:flex;align-items:center;gap:12px;position:relative;border-bottom:2px solid #0c1322}
+  .bc-emblem{width:78px;height:78px;border-radius:50%;flex:none;position:relative;border:3px solid rgba(255,255,255,.16);box-shadow:inset 0 0 20px rgba(0,0,0,.55),inset 0 2px 3px rgba(255,255,255,.08)}
+  .bc-emblem::before{content:"";position:absolute;left:7px;right:7px;top:50%;height:3px;background:rgba(255,255,255,.16);transform:translateY(-50%)}
+  .bc-emblem::after{content:"";position:absolute;left:50%;top:50%;width:24px;height:24px;border-radius:50%;border:3px solid rgba(255,255,255,.16);background:rgba(0,0,0,.25);transform:translate(-50%,-50%)}
+  .lid-id{flex:1;min-width:0}
+  .lid-photo{float:right;width:50px;height:62px;margin-left:8px;border:2px solid #44507a;border-radius:6px;background:#0e1526;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden}
+  .lid-photo img{width:100%;height:100%;object-fit:cover}.lid-photo span{font-family:'Press Start 2P',monospace;font-size:.36rem;color:#7d8bb5;text-align:center}
+  .lf{display:flex;align-items:center;gap:7px;margin-bottom:4px}
+  .lf span{font-family:'Press Start 2P',monospace;font-size:.4rem;color:#8fa0cf;min-width:42px}
+  .lf input{flex:1;min-width:0;background:rgba(255,255,255,.08);border:1px solid #44507a;border-radius:4px;padding:3px 6px;font-family:'Oswald',sans-serif;font-weight:600;font-size:.82rem;color:#eaf0ff}
+  .lf input:focus{outline:none;background:rgba(255,255,255,.16)}
+  .lid-url{display:flex;gap:5px;margin-top:5px}
+  .lid-url input{flex:1;min-width:0;background:rgba(255,255,255,.08);border:1px solid #44507a;border-radius:4px;padding:3px 6px;font-family:'Oswald',sans-serif;font-size:.74rem;color:#eaf0ff}
+  .lid-url input:focus{outline:none;background:rgba(255,255,255,.16)}
+  .lid-url button{font-family:'Press Start 2P',monospace;font-size:.4rem;border:1px solid #2b3a5e;background:#3a4870;color:#dfe8ff;border-radius:4px;padding:0 8px;cursor:pointer}
+  .bc-close{position:absolute;top:8px;right:10px;font-family:'Press Start 2P',monospace;font-size:.4rem;color:#8fa0cf;cursor:pointer}
+  .bc-close:hover{color:#fff}
+  .bc-base{background:radial-gradient(circle at 50% -10%,#26314e,var(--navy) 55%,var(--navy-d))}
+  .bc-base .badges-h{font-family:'Press Start 2P',monospace;font-size:.42rem;color:#9fb0df;text-align:center;margin-bottom:9px;letter-spacing:.5px}
+  .badges{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+  .badge{text-align:center;cursor:pointer;padding:4px 2px;border-radius:9px;transition:background .2s}
+  .badge:hover{background:rgba(255,255,255,.06)}.badge.sel{outline:2px solid var(--gold);outline-offset:-1px}
+  .badge .holder{width:46px;height:46px;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;position:relative;filter:grayscale(1) brightness(.7) opacity(.45);transition:filter .35s,transform .2s}
+  .badge.done .holder{filter:none;transform:scale(1.06)}
+  .badge.done .holder::after{content:"";position:absolute;inset:-6px;border-radius:50%;box-shadow:0 0 14px var(--bc);z-index:-1}
+  .badge .bn{font-family:'Press Start 2P',monospace;font-size:.36rem;color:#aebbe0;line-height:1.4}
+  .badge img.bimg{width:40px;height:40px;object-fit:contain;filter:drop-shadow(0 2px 2px rgba(0,0,0,.5))}
+  .bdg{width:38px;height:38px;position:relative;filter:drop-shadow(0 2px 2px rgba(0,0,0,.5))}
+  .bdg.boulder{clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%);background:linear-gradient(135deg,#e2e2e6,#9a9aa0);box-shadow:inset 0 0 0 4px rgba(255,255,255,.18)}
+  .bdg.cascade{width:32px;height:32px;border-radius:6px 50% 50% 50%;transform:rotate(45deg);background:radial-gradient(circle at 60% 35%,#bfe9ff,#2a93e0)}
+  .bdg.thunder{clip-path:polygon(50% 0,60% 18%,82% 12%,76% 33%,98% 40%,80% 50%,98% 60%,76% 67%,82% 88%,60% 82%,50% 100%,40% 82%,18% 88%,24% 67%,2% 60%,20% 50%,2% 40%,24% 33%,18% 12%,40% 18%);background:radial-gradient(circle,#ffd84a,#f08a1d)}
+  .bdg.rainbow{border-radius:50%;background:conic-gradient(#e74c3c 0 45deg,#e67e22 45deg 90deg,#f1c40f 90deg 135deg,#2ecc71 135deg 180deg,#1abc9c 180deg 225deg,#3498db 225deg 270deg,#9b59b6 270deg 315deg,#e84393 315deg 360deg)}
+  .bdg.rainbow::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;background:#5a5f5d;border:2px solid #2c2f2e;transform:translate(-50%,-50%)}
+  .bdg.soul{clip-path:polygon(50% 100%,8% 48%,0 28%,12% 8%,32% 8%,50% 26%,68% 8%,88% 8%,100% 28%,92% 48%);background:linear-gradient(135deg,#ffb3d1,#f06aa0)}
+  .bdg.marsh{border-radius:50%;background:radial-gradient(circle at 40% 35%,#ffe06b,#dca22a);box-shadow:inset 0 0 0 3px rgba(255,255,255,.25)}
+  .bdg.volcano{clip-path:polygon(50% 0,62% 26%,80% 16%,72% 42%,94% 46%,72% 62%,88% 100%,50% 80%,12% 100%,28% 62%,6% 46%,28% 42%,20% 16%,38% 26%);background:linear-gradient(#ff6a44,#c0231a)}
+  .bdg.earth{width:28px;height:36px;border-radius:0 100% 0 100%;background:linear-gradient(135deg,#8fe07a,#2f9e3f);box-shadow:inset 0 0 0 3px rgba(255,255,255,.18)}
+  .bc-cover{position:absolute;inset:0;height:160px;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:7;transform-origin:top center;transition:transform .62s cubic-bezier(.5,.1,.2,1),opacity .5s ease;backface-visibility:hidden;background:repeating-linear-gradient(96deg,rgba(255,255,255,.05) 0 2px,transparent 2px 5px),linear-gradient(158deg,#d2d6dc,#a4aab2 55%,#7e848d);box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -10px 22px rgba(0,0,0,.25)}
+  .bcase.open .bc-cover{transform:rotateX(-158deg);opacity:0;pointer-events:none}
+  .cov-emblem{width:58px;height:58px;border-radius:50%;position:relative;border:3px solid rgba(60,66,74,.6);box-shadow:inset 0 0 14px rgba(0,0,0,.25)}
+  .cov-emblem::before{content:"";position:absolute;left:6px;right:6px;top:50%;height:3px;background:rgba(60,66,74,.6);transform:translateY(-50%)}
+  .cov-emblem::after{content:"";position:absolute;left:50%;top:50%;width:18px;height:18px;border-radius:50%;border:3px solid rgba(60,66,74,.6);background:rgba(255,255,255,.4);transform:translate(-50%,-50%)}
+  .cov-text{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#3f454d;letter-spacing:.5px}
+
+  /* gym leader pocket (abaixo da case) */
+  .pocket{position:relative;height:38px;max-width:430px;margin:14px auto 0}
+  .pocket .lip{position:absolute;inset:0;border:3px solid var(--steel-d);border-radius:10px;z-index:3;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(#39414e,#262c37);box-shadow:inset 0 -2px 5px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.12)}
+  .pocket .lip span{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#cdd6e6;letter-spacing:1px}
+  .leadercard{position:absolute;left:8px;right:8px;bottom:10px;background:var(--paper);border:3px solid var(--frame);border-radius:9px;padding:12px 14px;z-index:2;transform:translateY(0) scale(.96);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.5,1.6,.4,1),opacity .35s;transform-origin:bottom center;box-shadow:0 8px 20px rgba(0,0,0,.45)}
+  .leadercard.show{transform:translateY(-32px) scale(1);opacity:1;pointer-events:auto;z-index:5}
+  .leadercard .lh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .leadercard .lh .gl{font-family:'Press Start 2P',monospace;font-size:.48rem;color:var(--navy);letter-spacing:1px}
+  .leadercard .lh .x{cursor:pointer;font-family:'Press Start 2P',monospace;font-size:.5rem;color:#b33}
+  .leadercard .name{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.4rem;color:var(--ink);line-height:1}
+  .leadercard .meta{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#555;line-height:2;margin-top:6px}
+  .leadercard .meta b{color:var(--red-d)}
+  .leadercard .lburl{display:flex;gap:5px;margin-top:8px}
+  .leadercard .lburl input{flex:1;min-width:0;border:1px solid #b9b4a0;border-radius:4px;padding:4px 6px;font-family:'Oswald',sans-serif;font-size:.74rem}
+  .leadercard .lburl input:focus{outline:none;border-color:var(--navy)}
+  .leadercard .lburl button{font-family:'Press Start 2P',monospace;font-size:.4rem;border:1px solid var(--frame);background:var(--navy);color:#fff;border-radius:4px;padding:0 7px;cursor:pointer}
+  .leadercard .badgeico{position:absolute;top:10px;right:14px;width:44px;height:44px;border:2px dashed var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;background:rgba(255,255,255,.4)}
+  .leadercard .badgeico .imptip{position:absolute;bottom:-1px;left:0;right:0;font-family:'Press Start 2P',monospace;font-size:.3rem;color:var(--navy);background:rgba(255,255,255,.7);padding:1px}
+  .leadercard .badgeico img{width:100%;height:100%;object-fit:contain}
+
+  /* ===== POKÉ BALL (realista) ===== */
+  .regball{width:138px;height:138px;border-radius:50%;position:relative;cursor:pointer;border:3px solid #1a1a1c;
+    background:
+      radial-gradient(circle at 38% 24%,rgba(255,255,255,.55),rgba(255,255,255,0) 26%),
+      linear-gradient(178deg,#cf4334 0 45%,#a32f25 45% 47%,#26282b 47% 53%,#cfccc4 53% 55%,#efece4 55% 100%);
+    box-shadow:inset -16px -18px 34px rgba(0,0,0,.5),inset 14px 12px 22px rgba(255,255,255,.18),0 20px 30px rgba(0,0,0,.6);
+    animation:floaty 3.6s ease-in-out infinite;transition:transform .18s}
+  .regball:hover{transform:scale(1.05)}.regball:active{transform:scale(.97)}
+  .regball::before{content:"";position:absolute;top:18px;left:30px;width:40px;height:20px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.6),rgba(255,255,255,0) 72%);transform:rotate(-22deg)}
+  .regball::after{content:"";position:absolute;left:50%;top:50%;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 40% 36%,#f4f4f2,#bdbdba 70%,#9a9a98);border:4px solid #1a1a1c;transform:translate(-50%,-50%);box-shadow:0 0 0 4px #cfcdc6,0 0 0 6px #1a1a1c,inset 0 -3px 5px rgba(0,0,0,.3),inset 0 2px 3px rgba(255,255,255,.5)}
+  .regshadow{width:108px;height:18px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.55),transparent 70%);margin-top:0;animation:shrink 3.6s ease-in-out infinite;filter:blur(2px)}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @keyframes shrink{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(.82);opacity:.32}}
+  .reghint{font-family:'Caveat',cursive;font-size:1.2rem;color:#f0e6d2;margin-top:4px}
+
+  /* ===== JORNAL / LINHA DO TEMPO ===== */
+  .journal{max-width:1000px;margin:28px auto 0;border:5px solid #14223a;border-radius:16px;overflow:hidden;box-shadow:0 14px 36px rgba(0,0,0,.5)}
+  .jrn-bar{display:flex;gap:8px;padding:12px;background:linear-gradient(160deg,#2f63ab,#1c4480 55%,#132f54)}
+  .jrn-bar input{flex:1;min-width:0;border:2px solid #14223a;border-radius:8px;padding:9px 11px;font-family:'Oswald',sans-serif;font-size:.95rem;color:#13243a;background:#eaf2ff}
+  .jrn-bar input:focus{outline:none;background:#fff}
+  .jrn-bar button{font-family:'Press Start 2P',monospace;font-size:.5rem;padding:10px 13px;border-radius:8px;cursor:pointer;border:2px solid #14223a;background:#f2c14e;color:#3a2a06;white-space:nowrap}
+  .jrn-bar button:hover{background:#ffd266}
+  .ptl-title{background:#15202f;color:#cfe0f5;font-family:'Press Start 2P',monospace;font-size:.56rem;padding:12px 16px;letter-spacing:1px;border-top:2px solid #0c1626}
+  .ptl-list{padding:18px 18px 8px;max-height:280px;overflow:auto;background:#15202f}
+  .ptl-empty{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#5f7596;text-align:center;padding:18px;line-height:1.9}
+  .ptl-item{position:relative;padding:0 0 16px 26px}
+  .ptl-item::before{content:"";position:absolute;left:5px;top:5px;bottom:-1px;width:2px;background:#2c3e57}
+  .ptl-item:last-child::before{display:none}
+  .ptl-item .node{position:absolute;left:0;top:3px;width:12px;height:12px;border-radius:50%;border:2px solid #15202f}
+  .ptl-item .stamp{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#7fb3ff}
+  .ptl-item .txt{font-family:'Oswald',sans-serif;font-size:.96rem;color:#dfe8f5;margin-top:4px}
+
+  /* ===== MODALS ===== */
   .modal{position:fixed;inset:0;background:rgba(6,16,12,.86);display:none;align-items:center;justify-content:center;z-index:60;padding:20px}
   .modal.open{display:flex}
   .modal-card{width:340px;max-width:100%;background:var(--paper);border:5px solid var(--frame);border-radius:14px;overflow:hidden;animation:pop .3s ease;box-shadow:0 20px 50px rgba(0,0,0,.6)}
   @keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+  .pokemodal .modal-card{background:transparent;border:none;box-shadow:none;width:330px;overflow:visible;animation:none}
+  .pokecapsule{position:relative;perspective:900px}
+  .pc-lid{height:84px;border-radius:200px 200px 12px 12px/150px 150px 12px 12px;background:radial-gradient(circle at 38% 26%,rgba(255,255,255,.5),transparent 44%),linear-gradient(#cf4334,#a32f25);border:3px solid #1a1a1c;border-bottom:none;transform-origin:bottom center;transform:rotateX(0);transition:transform .65s cubic-bezier(.5,.1,.2,1);position:relative;z-index:3;box-shadow:inset 0 4px 10px rgba(255,255,255,.22)}
+  .pc-lid .seam{position:absolute;bottom:-3px;left:-1px;right:-1px;height:6px;background:#1a1a1c}
+  .pc-lid .cbtn{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#f4f4f2,#bdbdba);border:5px solid #1a1a1c;z-index:5;box-shadow:0 0 0 3px #cfcdc6}
+  .pokecapsule.open .pc-lid{transform:rotateX(-132deg)}
+  .pc-inner{margin-top:-3px;background:#f4f1e6;border:3px solid #1a1a1c;border-top:none;border-radius:0 0 20px 20px;padding:0 16px;max-height:0;opacity:0;overflow:hidden;transition:max-height .55s ease,opacity .45s ease,padding .45s ease}
+  .pokecapsule.open .pc-inner{max-height:600px;opacity:1;padding:24px 16px 16px}
+  .pc-title{font-family:'Press Start 2P',monospace;font-size:.56rem;color:var(--red-d);text-align:center;margin-bottom:14px;letter-spacing:1px}
   .modal-h{color:#fff;font-family:'Press Start 2P',monospace;font-size:.6rem;padding:12px 14px;display:flex;align-items:center;gap:9px;letter-spacing:1px}
-  .modal-h.add{background:linear-gradient(var(--red),#a52a20)}.modal-h.faint{background:linear-gradient(#3a2030,#241019)}
-  .modal-h .mb{width:16px;height:16px;border-radius:50%;background:linear-gradient(#fff 0 50%,#e23 50%);border:2px solid #1c1e1d}
+  .modal-h.faint{background:linear-gradient(#3a2030,#241019)}
   .modal-b{padding:16px}
   .mfield{margin-bottom:12px}
-  .mfield label{display:block;font-family:'Press Start 2P',monospace;font-size:.46rem;color:var(--teal-dd);margin-bottom:5px;letter-spacing:.5px}
+  .mfield label{display:block;font-family:'Press Start 2P',monospace;font-size:.46rem;color:var(--navy);margin-bottom:5px}
   .mfield input,.mfield select{width:100%;border:2px solid #b9b4a0;border-radius:6px;padding:8px;font-family:'Oswald',sans-serif;font-size:.96rem;color:var(--ink);background:#fff}
-  .mfield input:focus,.mfield select:focus{outline:none;border-color:var(--teal-d)}
+  .mfield input:focus,.mfield select:focus{outline:none;border-color:var(--navy)}
   .mphoto{display:flex;align-items:center;gap:12px}
   .mphoto .drop{width:64px;height:64px;border-radius:50%;border:2px dashed #b9b4a0;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;background:#fff;flex:none}
   .mphoto .drop img{width:100%;height:100%;object-fit:cover}
   .mphoto .drop span{font-family:'Press Start 2P',monospace;font-size:.4rem;color:#8a948a;text-align:center}
   .macts{display:flex;gap:10px;margin-top:6px}
-  .macts button{flex:1;font-family:'Press Start 2P',monospace;font-size:.5rem;padding:11px;border-radius:8px;cursor:pointer;border:2px solid var(--frame);letter-spacing:.5px}
-  .macts .cap{background:var(--teal);color:#063426}.macts .cap:hover{background:var(--teal-l)}
+  .macts button{flex:1;font-family:'Press Start 2P',monospace;font-size:.5rem;padding:11px;border-radius:8px;cursor:pointer;border:2px solid var(--frame)}
+  .macts .cap{background:#cf4334;color:#fff}.macts .cap:hover{background:#e0503f}
   .macts .can{background:#e6e0ce;color:#555}
   .faint-list{max-height:300px;overflow:auto;margin-bottom:8px}
   .fmember{display:flex;align-items:center;gap:11px;width:100%;background:#fff;border:2px solid #b9b4a0;border-radius:9px;padding:8px 10px;cursor:pointer;margin-bottom:8px;text-align:left}
@@ -207,17 +212,16 @@
   .fmember .ft{width:40px;height:40px;border-radius:50%;border:2px solid #b9b4a0;overflow:hidden;flex:none;background:#e8e3d2;display:flex;align-items:center;justify-content:center}
   .fmember .ft img{width:100%;height:100%;object-fit:cover}
   .fmember .ft .eb{width:16px;height:16px;border-radius:50%;background:linear-gradient(#999 0 50%,#e9e4d5 50%);border:1.5px solid #555}
-  .fmember .fm{flex:1}.fmember .fm .ffn{font-family:'Press Start 2P',monospace;font-size:.4rem;color:var(--teal-dd)}
+  .fmember .fm{flex:1}.fmember .fm .ffn{font-family:'Press Start 2P',monospace;font-size:.4rem;color:var(--navy)}
   .fmember .fm .fnm{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.05rem;color:var(--ink)}
   .fmember .fx{font-family:'Press Start 2P',monospace;font-size:.46rem;color:#9e3350}
   .faint-empty{text-align:center;font-family:'Press Start 2P',monospace;font-size:.46rem;color:#888;padding:18px;line-height:1.9}
 
-  /* MEMORIAL */
-  .gy-wrap{display:none;max-width:940px;margin:30px auto 0;border:5px solid #2a2d2c;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+  /* ===== MEMORIAL ===== */
+  .gy-wrap{display:none;max-width:1000px;margin:28px auto 0;border:5px solid #2a2d2c;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.5)}
   .gy-title{background:linear-gradient(#4a3a5a,#2e2336);color:#e9def0;font-family:'Press Start 2P',monospace;font-size:.58rem;padding:13px 16px;letter-spacing:1px;display:flex;justify-content:space-between;align-items:center}
   .gy-title b{color:#caa6e0}
-  .gy-x{cursor:pointer;color:#caa6e0;font-family:'Press Start 2P',monospace;font-size:.6rem}
-  .gy-x:hover{color:#fff}
+  .gy-x{cursor:pointer;color:#caa6e0;font-family:'Press Start 2P',monospace;font-size:.6rem}.gy-x:hover{color:#fff}
   .graveyard{padding:26px 18px 32px;display:grid;grid-template-columns:repeat(auto-fill,minmax(116px,1fr));gap:22px;border-top:7px solid #6f6a78;background-color:#b6d0ad;background-image:linear-gradient(45deg,#a4c69a 25%,transparent 25%,transparent 75%,#a4c69a 75%),linear-gradient(45deg,#a4c69a 25%,transparent 25%,transparent 75%,#a4c69a 75%);background-size:46px 46px;background-position:0 0,23px 23px}
   .gy-empty{grid-column:1/-1;text-align:center;font-family:'Press Start 2P',monospace;font-size:.5rem;color:#4f6049;padding:26px;line-height:1.9}
   .gtomb{display:flex;flex-direction:column;align-items:center}
@@ -226,113 +230,33 @@
   .gslab{position:relative;width:100%;max-width:118px;background:linear-gradient(#c4c7cf,#8c8f99 70%,#75777f);border:2px solid #5c5f68;border-radius:48% 48% 7% 7%/34% 34% 5% 5%;padding:30px 8px 15px;text-align:center;box-shadow:inset 0 4px 8px rgba(255,255,255,.45),inset 0 -6px 10px rgba(0,0,0,.18),0 10px 16px rgba(0,0,0,.4)}
   .gslab .grm2{position:absolute;top:4px;right:5px;width:17px;height:17px;border-radius:50%;border:1px solid #5c5f68;background:#d6d8de;font-size:.58rem;line-height:1;cursor:pointer;color:#5a5d66}
   .gslab .grm2:hover{background:#7a2a3a;color:#fff}
-  .gslab .emblem{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:23px;height:23px;border-radius:50%;background:linear-gradient(#8d909a,#6f727b);border:2px solid #5c5f68;box-shadow:inset 0 1px 2px rgba(255,255,255,.4)}
+  .gslab .emblem{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:23px;height:23px;border-radius:50%;background:linear-gradient(#8d909a,#6f727b);border:2px solid #5c5f68}
   .gslab .emblem::before{content:"";position:absolute;left:1px;right:1px;top:50%;height:2px;background:#5c5f68;transform:translateY(-50%)}
   .gslab .emblem::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;border-radius:50%;background:#c4c7cf;border:1.5px solid #5c5f68;transform:translate(-50%,-50%)}
   .gslab .gphoto{width:42px;height:42px;border-radius:50%;margin:0 auto 6px;overflow:hidden;border:2px solid #5c5f68;background:#5c5f68;display:flex;align-items:center;justify-content:center}
   .gslab .gphoto img{width:100%;height:100%;object-fit:cover;filter:grayscale(.85) contrast(.95)}
   .gslab .gphoto .sk{font-size:1.05rem}
-  .gslab .grip{font-family:'Press Start 2P',monospace;font-size:.38rem;color:#3f424a;letter-spacing:.5px}
+  .gslab .grip{font-family:'Press Start 2P',monospace;font-size:.38rem;color:#3f424a}
   .gslab .gname{font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;color:#2c2f36;line-height:1.05;margin-top:3px}
   .gslab .gsp{font-family:'Oswald',sans-serif;font-size:.76rem;font-style:italic;color:#4a4d55}
   .gslab .gfn{font-family:'Press Start 2P',monospace;font-size:.34rem;color:#5a5d66;margin-top:5px}
   .gflowers{display:flex;gap:4px;margin-top:-7px;z-index:2}
   .gflowers i{width:9px;height:9px;border-radius:50%;display:block;box-shadow:0 0 0 2px #3f7a3a}
-  .f-btn{font-family:'Press Start 2P',monospace;font-size:.62rem;color:#dfe8f5;background:#2e2336;border:2px solid #0e3a1e;border-radius:8px;padding:9px 13px;cursor:pointer;letter-spacing:1px}
-  .f-btn:hover{background:#4a3a5a}
-  /* pokébola que abre (diálogo de novo Pokémon) */
-  .pokemodal .modal-card{background:transparent;border:none;box-shadow:none;width:330px;overflow:visible;animation:none}
-  .pokecapsule{position:relative;perspective:900px}
-  .pc-lid{height:84px;border-radius:200px 200px 12px 12px/150px 150px 12px 12px;background:radial-gradient(circle at 38% 28%,rgba(255,255,255,.6),transparent 42%),linear-gradient(#ff5a48,#cf2a1c);border:3px solid #141519;border-bottom:none;transform-origin:bottom center;transform:rotateX(0);transition:transform .65s cubic-bezier(.5,.1,.2,1);position:relative;z-index:3;box-shadow:inset 0 4px 10px rgba(255,255,255,.3)}
-  .pc-lid .seam{position:absolute;bottom:-3px;left:-1px;right:-1px;height:6px;background:#141519}
-  .pc-lid .cbtn{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#d2d2d2);border:5px solid #141519;z-index:5}
-  .pokecapsule.open .pc-lid{transform:rotateX(-132deg)}
-  .pc-inner{margin-top:-3px;background:#f4f1e6;border:3px solid #141519;border-top:none;border-radius:0 0 20px 20px;padding:0 16px;max-height:0;opacity:0;overflow:hidden;transition:max-height .55s ease,opacity .45s ease,padding .45s ease}
-  .pokecapsule.open .pc-inner{max-height:600px;opacity:1;padding:24px 16px 16px}
-  .pc-title{font-family:'Press Start 2P',monospace;font-size:.56rem;color:var(--red-d);text-align:center;margin-bottom:14px;letter-spacing:1px}
-
-  .tip{text-align:center;font-family:'Press Start 2P',monospace;font-size:.44rem;color:#6f9486;margin-top:26px;line-height:2.1;letter-spacing:.5px}
+  .tip{text-align:center;font-family:'Caveat',cursive;font-size:1.25rem;color:#f0e6d2;margin-top:26px;line-height:1.5;text-shadow:0 1px 2px rgba(0,0,0,.5)}
 </style>
 </head>
 <body>
-<div class="head"><div class="t">A GRANDE ARCA</div><div class="s">NOÉ vs. O DILÚVIO · POKÉMON LEAF GREEN</div></div>
+<div class="head"><div class="t">A GRANDE ARCA</div><div class="s">a mesa do professor · Noé vs. o Dilúvio</div></div>
 
-<!-- POKÉTIMER -->
-<div class="ptimer">
-  <div class="pt-device">
-    <div class="pt-screen"><div class="pt-clock" id="clock">00:00:00</div><div class="pt-label">TEMPO DE JOGO</div></div>
-    <div class="pt-controls"><button id="ptStart">▶ INICIAR</button><button id="ptReset">⟳ ZERAR</button></div>
-    <div class="pt-mark"><input id="ptInput" placeholder="O que aconteceu? (registrar marco)"><button id="ptMark">+ MARCO</button></div>
-  </div>
-  <div class="pt-timeline"><div class="ptl-title">⏳ LINHA DO TEMPO DA JORNADA</div>
-    <div class="ptl-list" id="ptlList"><p class="ptl-empty">Nenhum marco ainda. Inicie o cronômetro e registre a jornada.</p></div>
-  </div>
-</div>
-
-<!-- TOOLBAR -->
 <div class="toolbar">
   <button class="exp" id="exportBtn">⭳ EXPORTAR JORNADA</button>
   <label class="imp">⭱ IMPORTAR JORNADA<input type="file" accept=".json,application/json" hidden id="importInput"></label>
 </div>
 
-<!-- 3D REGISTER POKEBALL -->
-<div class="regwrap">
-  <div class="regball" id="regBall" title="Registrar Pokémon"></div>
-  <div class="regshadow"></div>
-  <div class="reglabel">REGISTRAR POKÉMON<small>toque na pokébola</small></div>
-</div>
-
-<div class="layout">
-  <!-- CASE -->
-  <div class="obj">
-    <div class="objlabel">CASE · ID &amp; INSÍGNIAS</div>
-    <div class="case" id="case">
-      <div class="case-stack">
-        <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
-        <div class="tray">
-          <div class="idcard">
-            <div class="id-top"><span class="tt">TRAINER ID</span><span class="no" id="trNo">IDNo. 21037</span></div>
-            <div class="id-body">
-              <label class="id-photo" id="idPhoto" title="Importar foto"><input type="file" accept="image/*" hidden><span class="pp">+ FOTO</span><img hidden alt=""></label>
-              <div class="id-fields">
-                <div class="idf"><span class="l">NAME</span><input id="trName" value="Noé"></div>
-                <div class="idf"><span class="l">GAME</span><input value="Leaf Green" readonly></div>
-                <div class="idf"><span class="l">TOWN</span><input id="trTown" value="Pallet"></div>
-                <div class="idf"><span class="l">CLASS</span><input id="trClass" value="Arauto do Fim"></div>
-              </div>
-            </div>
-            <div class="trurl"><input id="trUrl" placeholder="URL da foto do treinador (opcional)"><button id="trUrlBtn">OK</button></div>
-            <div class="id-foot"><span>ADVENTURE STARTED</span><input id="trAdv" value="DIA 0"></div>
-          </div>
-          <div class="hingebar"><i></i><span class="bar"></span><i></i></div>
-          <div class="badge-zone">
-            <div class="badges-h">INSÍGNIAS · OS 8 CONVERTIDOS</div>
-            <div class="badges" id="badges"></div>
-            <div class="pocket">
-              <div class="leadercard" id="leadercard">
-                <label class="badgeico" id="lbadge" title="Importar imagem da badge"><input type="file" accept="image/*" hidden><span class="bhold"></span><span class="imptip">IMPORTAR</span></label>
-                <div class="lh"><span class="gl">GYM LEADER</span><span class="x" id="lclose">▼</span></div>
-                <div class="name" id="lname">—</div>
-                <div class="meta"><b>GYM</b> <span id="lgym">—</span><br><b>TOWN</b> <span id="ltown">—</span><br><b>TYPE</b> <span id="ltype">—</span></div>
-                <div class="lburl"><input id="lbUrl" placeholder="URL da badge"><button id="lbUrlBtn">OK</button></div>
-              </div>
-              <div class="lip" id="pocketLip"><span>▲ GYM LEADER · BOLSO</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="lid" id="lid">
-          <span class="latch"></span>
-          <div class="pin"><svg viewBox="0 0 100 100" fill="none"><path d="M50 12 a30 30 0 1 1 -21 51 L50 88 L50 12Z" fill="#0e6f54"/><circle cx="50" cy="42" r="30" fill="none" stroke="#0e6f54" stroke-width="7"/><line x1="20" y1="42" x2="80" y2="42" stroke="#0e6f54" stroke-width="7"/><circle cx="50" cy="42" r="11" fill="#0e6f54" stroke="#1aa57e" stroke-width="4"/></svg></div>
-          <div class="open-cta">▲ ABRIR MALETA</div>
-        </div>
-      </div>
-      <div class="closehint" id="closehint">— TOCAR PARA FECHAR —</div>
-    </div>
-  </div>
-
-  <!-- TEAM -->
-  <div class="obj">
-    <div class="objlabel">TEAM BUILDER · ARCA POKÉDEX</div>
+<div class="desk">
+  <!-- POKÉDEX (TEAM) -->
+  <div class="pokedex-wrap">
+    <div class="deskLabel">Pokédex<small>a arca · 6 funções</small></div>
     <div class="pokedex">
       <div class="pdx-bezel"><div class="pdx-screen">
         <div class="pdx-lights"><i style="background:#7fd1ff"></i><i style="background:#ff5b5b"></i><i style="background:#ffd34d"></i></div>
@@ -360,6 +284,56 @@
       <div class="pdx-ball"><span class="btn"></span></div>
     </div>
   </div>
+
+  <!-- BADGE CASE -->
+  <div class="case-wrap">
+    <div class="deskLabel">Badge Case<small>os 8 convertidos · ID</small></div>
+    <div class="bcase" id="bcase">
+      <span class="bc-hinge"></span>
+      <div class="bc-lid">
+        <div class="bc-emblem"></div>
+        <div class="lid-id">
+          <span class="bc-close" id="bcClose">▲ FECHAR</span>
+          <label class="lid-photo" id="idPhoto" title="Foto do treinador"><input type="file" accept="image/*" hidden><span>+FOTO</span><img hidden alt=""></label>
+          <div class="lf"><span>NAME</span><input id="trName" value="Noé"></div>
+          <div class="lf"><span>TOWN</span><input id="trTown" value="Pallet"></div>
+          <div class="lf"><span>CLASS</span><input id="trClass" value="Arauto do Fim"></div>
+          <div class="lf"><span>DAY</span><input id="trAdv" value="DIA 0"></div>
+          <div class="lid-url"><input id="trUrl" placeholder="URL da foto"><button id="trUrlBtn">OK</button></div>
+        </div>
+      </div>
+      <div class="bc-base">
+        <div class="badges-h">INSÍGNIAS — OS 8 CONVERTIDOS</div>
+        <div class="badges" id="badges"></div>
+      </div>
+      <button class="bc-cover" id="bcCover"><span class="cov-emblem"></span><span class="cov-text">BADGE CASE · TOQUE PARA ABRIR</span></button>
+    </div>
+    <div class="pocket">
+      <div class="leadercard" id="leadercard">
+        <label class="badgeico" id="lbadge" title="Importar imagem da badge"><input type="file" accept="image/*" hidden><span class="bhold"></span><span class="imptip">IMPORTAR</span></label>
+        <div class="lh"><span class="gl">GYM LEADER</span><span class="x" id="lclose">▼</span></div>
+        <div class="name" id="lname">—</div>
+        <div class="meta"><b>GYM</b> <span id="lgym">—</span><br><b>TOWN</b> <span id="ltown">—</span><br><b>TYPE</b> <span id="ltype">—</span></div>
+        <div class="lburl"><input id="lbUrl" placeholder="URL da badge"><button id="lbUrlBtn">OK</button></div>
+      </div>
+      <div class="lip" id="pocketLip"><span>▲ GYM LEADER · BOLSO</span></div>
+    </div>
+  </div>
+
+  <!-- POKÉ BALL -->
+  <div class="ball-wrap">
+    <div class="deskLabel" style="text-align:center;padding:0">Poké Ball</div>
+    <div class="regball" id="regBall" title="Registrar Pokémon"></div>
+    <div class="regshadow"></div>
+    <div class="reghint">toque para registrar um Pokémon</div>
+  </div>
+</div>
+
+<!-- JORNAL -->
+<div class="journal">
+  <div class="jrn-bar"><input id="ptInput" placeholder="O que aconteceu? (registrar marco)"><button id="ptMark">+ MARCO</button></div>
+  <div class="ptl-title">⏳ LINHA DO TEMPO DA JORNADA</div>
+  <div class="ptl-list" id="ptlList"><p class="ptl-empty">Nenhum marco ainda. Registre os acontecimentos da jornada.</p></div>
 </div>
 
 <!-- MEMORIAL -->
@@ -397,39 +371,36 @@
   <div class="modal-b"><div class="faint-list" id="faintList"></div><div class="macts"><button class="can" id="fCancel" style="flex:1">CANCELAR</button></div></div>
 </div></div>
 
-<div class="tip">POKÉBOLA 3D = REGISTRAR · ✝ BAIXA = QUEM TOMBOU · EXPORTAR/IMPORTAR SALVA A JORNADA · FOTOS POR ARQUIVO OU URL</div>
+<div class="tip">Poké Ball = registrar · ✝ = quem tombou · F = erguer os túmulos · Exportar/Importar salva a jornada</div>
 
 <script>
-  /* ===== TIMER + TIMELINE ===== */
-  let _secs=0,_run=false,_iv=null,timelineData=[];
-  const _clock=document.getElementById('clock'),_startBtn=document.getElementById('ptStart'),_ptlList=document.getElementById('ptlList');
+  /* ===== TEMPO (relógio real) + LINHA DO TEMPO ===== */
+  let timelineData=[];
+  const _ptlList=document.getElementById('ptlList');
   const _NC={mark:'#f2c14e',badge:'#5fe0b0',death:'#c4c7cf',catch:'#7fb3ff'};
-  function _fmt(s){const h=String(Math.floor(s/3600)).padStart(2,'0'),m=String(Math.floor(s%3600/60)).padStart(2,'0'),x=String(s%60).padStart(2,'0');return h+':'+m+':'+x;}
-  function getStamp(){return _fmt(_secs);}
-  function _render(){_clock.textContent=_fmt(_secs);}
-  function _tick(){_secs++;_render();}
-  _startBtn.addEventListener('click',()=>{_run=!_run;if(_run){_iv=setInterval(_tick,1000);_startBtn.textContent='⏸ PAUSAR';}else{clearInterval(_iv);_startBtn.textContent=_secs?'▶ RETOMAR':'▶ INICIAR';}});
-  document.getElementById('ptReset').addEventListener('click',()=>{clearInterval(_iv);_run=false;_secs=0;_render();_startBtn.textContent='▶ INICIAR';});
+  function getStamp(){return new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});}
   function _renderTLItem(e){const it=document.createElement('div');it.className='ptl-item';
     const node=document.createElement('span');node.className='node';node.style.background=_NC[e.type]||'#caa6e0';
     const st=document.createElement('div');st.className='stamp';st.textContent='⏱ '+e.stamp;
     const tx=document.createElement('div');tx.className='txt';tx.textContent=e.text;
     it.append(node,st,tx);_ptlList.appendChild(it);}
-  function rebuildTimeline(){_ptlList.innerHTML='';if(!timelineData.length){_ptlList.innerHTML='<p class="ptl-empty">Nenhum marco ainda. Inicie o cronômetro e registre a jornada.</p>';return;}timelineData.forEach(_renderTLItem);_ptlList.scrollTop=_ptlList.scrollHeight;}
+  function rebuildTimeline(){_ptlList.innerHTML='';if(!timelineData.length){_ptlList.innerHTML='<p class="ptl-empty">Nenhum marco ainda. Registre os acontecimentos da jornada.</p>';return;}timelineData.forEach(_renderTLItem);_ptlList.scrollTop=_ptlList.scrollHeight;}
   function addTimeline(stamp,text,type){const e={stamp,text,type};timelineData.push(e);const em=_ptlList.querySelector('.ptl-empty');if(em)em.remove();_renderTLItem(e);_ptlList.scrollTop=_ptlList.scrollHeight;}
   const _ptInput=document.getElementById('ptInput');
   function _mark(){const t=_ptInput.value.trim()||'Marco sem título';addTimeline(getStamp(),t,'mark');_ptInput.value='';}
   document.getElementById('ptMark').addEventListener('click',_mark);
   _ptInput.addEventListener('keydown',e=>{if(e.key==='Enter')_mark();});
 
-  /* ===== CASE ===== */
-  const caseEl=document.getElementById('case'),lid=document.getElementById('lid');
-  lid.addEventListener('click',()=>caseEl.classList.add('open'));
-  document.getElementById('closehint').addEventListener('click',()=>caseEl.classList.remove('open'));
-  const trImg=document.querySelector('#idPhoto img'),trTxt=document.querySelector('#idPhoto .pp');
+  /* ===== BADGE CASE abrir/fechar ===== */
+  const bcase=document.getElementById('bcase');
+  document.getElementById('bcCover').addEventListener('click',()=>bcase.classList.add('open'));
+  document.getElementById('bcClose').addEventListener('click',e=>{e.stopPropagation();bcase.classList.remove('open');});
+
+  /* ===== TREINADOR (foto) ===== */
+  const trImg=document.querySelector('#idPhoto img'),trTxt=document.querySelector('#idPhoto span');
   function setTrainerPhoto(src){trImg.src=src;trImg.hidden=false;trTxt.style.display='none';}
   document.querySelector('#idPhoto input').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>setTrainerPhoto(r.result);r.readAsDataURL(f)});
-  document.getElementById('trUrlBtn').addEventListener('click',()=>{const u=document.getElementById('trUrl').value.trim();if(u){setTrainerPhoto(u);}});
+  document.getElementById('trUrlBtn').addEventListener('click',e=>{e.stopPropagation();const u=document.getElementById('trUrl').value.trim();if(u)setTrainerPhoto(u);});
   const trName=document.getElementById('trName'),trTown=document.getElementById('trTown'),trClass=document.getElementById('trClass'),trAdv=document.getElementById('trAdv');
 
   /* ===== BADGES ===== */
@@ -460,7 +431,7 @@
   document.querySelector('#lbadge input').addEventListener('change',e=>{const f=e.target.files[0];if(!f||curr==null)return;const r=new FileReader();r.onload=()=>{gyms[curr].img=r.result;bhold.innerHTML=badgeMarkup(gyms[curr]);gyms[curr]._holder.innerHTML=badgeMarkup(gyms[curr]);};r.readAsDataURL(f)});
   document.getElementById('lbUrlBtn').addEventListener('click',()=>{const u=document.getElementById('lbUrl').value.trim();if(u&&curr!=null){gyms[curr].img=u;bhold.innerHTML=badgeMarkup(gyms[curr]);gyms[curr]._holder.innerHTML=badgeMarkup(gyms[curr]);}});
 
-  /* ===== TEAM ===== */
+  /* ===== EQUIPE ===== */
   const slotsDef=[{key:'HEAVY',fn:'HEAVY',casta:'#E2542A'},{key:'DRIVER',fn:'DRIVER',casta:'#E2542A'},{key:'FUEL',fn:'FUEL',casta:'#C9A24B'},{key:'FORAGE',fn:'FORAGE',casta:'#C9A24B'},{key:'MEDIC',fn:'MEDIC',casta:'#A878B0'},{key:'HACKER',fn:'HACKER',casta:'#A878B0'}];
   const plist=document.getElementById('plist'),pcount=document.getElementById('pcount'),slotMap={},slotList=[];
   function recount(){let n=0;slotList.forEach(s=>{if(s.isLiving())n++});pcount.textContent='EQUIPE '+n+'/6';}
@@ -484,7 +455,7 @@
   document.getElementById('infoBtn').addEventListener('click',()=>info.classList.add('open'));
   document.getElementById('infoClose').addEventListener('click',()=>info.classList.remove('open'));
 
-  /* ===== ADD MODAL (file or URL) ===== */
+  /* ===== ADD (pokébola que abre) ===== */
   const modal=document.getElementById('modal'),pokecapsule=document.getElementById('pokecapsule'),mName=document.getElementById('mName'),mSpecies=document.getElementById('mSpecies'),mFunc=document.getElementById('mFunc'),mUrl=document.getElementById('mUrl');
   const mDrop=document.getElementById('mDrop'),mDropInput=mDrop.querySelector('input'),mDropImg=mDrop.querySelector('img'),mDropTxt=mDrop.querySelector('span');
   let capturePhoto=null;
@@ -506,13 +477,12 @@
     t.innerHTML=`<div class="gslab"><button class="grm2" title="Remover">&times;</button><span class="emblem"></span><div class="gphoto">${d.photo?`<img src="${d.photo}" alt="">`:'<span class="sk">💀</span>'}</div><div class="grip">❀ AQUI JAZ ❀</div><div class="gname">${d.name}</div>${d.species?`<div class="gsp">${d.species}</div>`:''}<div class="gfn">${d.fn}</div></div><div class="gflowers">${_flowers()}</div>`;
     t.querySelector('.grm2').addEventListener('click',()=>{graveData=graveData.filter(x=>x!==d);t.remove();gyCount.textContent=graveData.length;updateRiseBtn();if(!graveData.length)graveyard.innerHTML='<p class="gy-empty">Que ninguém precise repousar aqui... ainda.</p>';});
     return t;}
-  function rebuildGraveyard(){graveyard.innerHTML='';if(!graveData.length){graveyard.innerHTML='<p class="gy-empty">Que ninguém precise repousar aqui... ainda.</p>';gyCount.textContent=0;updateRiseBtn();return;}graveData.forEach(d=>graveyard.appendChild(makeTombNode(d)));gyCount.textContent=graveData.length;updateRiseBtn();}
   function addGrave(d,log){const empty=graveyard.querySelector('.gy-empty');if(empty)empty.remove();graveData.push(d);graveyard.appendChild(makeTombNode(d));gyCount.textContent=graveData.length;updateRiseBtn();if(log!==false)addTimeline(getStamp(),d.name+' tombou · '+d.fn,'death');}
   function raiseTombs(){gyWrap.style.display='block';requestAnimationFrame(()=>{const tombs=[...graveyard.querySelectorAll('.gtomb')];tombs.forEach((t,i)=>{t.classList.remove('rising');void t.offsetWidth;t.style.animationDelay=(i*0.12)+'s';t.classList.add('rising');});gyWrap.scrollIntoView({behavior:'smooth',block:'center'});});}
   riseBtn.addEventListener('click',raiseTombs);
   document.getElementById('gyClose').addEventListener('click',()=>{gyWrap.style.display='none';});
 
-  /* ===== FAINT MODAL ===== */
+  /* ===== FAINT ===== */
   const faintModal=document.getElementById('faintModal'),faintList=document.getElementById('faintList');
   function openFaint(){faintList.innerHTML='';const living=slotList.filter(s=>s.isLiving());
     if(!living.length){faintList.innerHTML='<p class="faint-empty">Ninguém vivo na arca para tombar.<br>Registre um Pokémon primeiro.</p>';}
@@ -526,13 +496,12 @@
   document.getElementById('fCancel').addEventListener('click',()=>faintModal.classList.remove('open'));
 
   /* ===== EXPORT / IMPORT ===== */
-  function collectState(){return {v:1,timer:_secs,
+  function collectState(){return {v:2,
     trainer:{name:trName.value,town:trTown.value,cls:trClass.value,adv:trAdv.value,photo:trImg.hidden?null:trImg.src},
     team:Object.fromEntries(Object.entries(slotMap).map(([k,a])=>[k,a.get()])),
     badges:gyms.map(g=>({done:g._badge.classList.contains('done'),img:g.img||null})),
     graves:graveData.slice(),timeline:timelineData.slice()};}
   function applyState(o){if(!o||typeof o!=='object')return;
-    _secs=o.timer||0;clearInterval(_iv);_run=false;_render();_startBtn.textContent=_secs?'▶ RETOMAR':'▶ INICIAR';
     if(o.trainer){const t=o.trainer;if(t.name!=null)trName.value=t.name;if(t.town!=null)trTown.value=t.town;if(t.cls!=null)trClass.value=t.cls;if(t.adv!=null)trAdv.value=t.adv;if(t.photo)setTrainerPhoto(t.photo);}
     if(o.team){Object.values(slotMap).forEach(a=>a.clearSlot());Object.entries(o.team).forEach(([k,d])=>{if(slotMap[k])slotMap[k].setAll(d)});}
     if(o.badges)o.badges.forEach((b,i)=>{if(gyms[i])setBadgeState(i,b.done,b.img)});
